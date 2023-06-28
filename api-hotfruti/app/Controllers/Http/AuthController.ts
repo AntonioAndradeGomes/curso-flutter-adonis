@@ -1,4 +1,7 @@
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
+import Admin from "App/Models/Admin";
+import Client from "App/Models/Client";
+import Establishment from "App/Models/Establishment";
 import User from "App/Models/User";
 
 export default class AuthController {
@@ -43,6 +46,50 @@ export default class AuthController {
     } catch {
       return response.unauthorized({ message: "Not authorized for this" });
     }
+  }
 
+  public async me({ auth, response }: HttpContextContract) {
+    const userAuth = await auth.use("api").authenticate();
+    let data: any;
+
+    switch (userAuth.type) {
+      case "client":
+        const client = await Client.findByOrFail("userId", userAuth.id);
+        data = {
+          id_client: client.id,
+          name: client.name,
+          phone: client.phone,
+          email: userAuth.email,
+        };
+        break;
+      case "establishment":
+        const establishment = await Establishment.findByOrFail(
+          "userId",
+          userAuth.id
+        );
+        data = {
+          id_establishment: establishment.id,
+          name: establishment.name,
+          logo: establishment.logo,
+          online: establishment.online,
+          itsBlocked: establishment.itsBlocked,
+          email: userAuth.email,
+        };
+        break;
+      case "admin":
+        const admin = await Admin.findByOrFail("userId", userAuth.id);
+        data = {
+          id_admin: admin.id,
+          name: admin.name,
+          email: userAuth.email,
+        };
+        break;
+      default:
+        return response.unauthorized({
+          message: "Unauthorized user - type not found",
+        });
+    }
+
+    return response.ok({ user: data });
   }
 }
