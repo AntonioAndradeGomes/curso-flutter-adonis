@@ -33,4 +33,16 @@ export default class AuthController {
       });
     }
   }
+
+  public async logout({ auth, response }: HttpContextContract) {
+    try {
+      await auth.use("api").revoke();
+      return response.ok({
+        revoked: true,
+      });
+    } catch {
+      return response.unauthorized({ message: "Not authorized for this" });
+    }
+
+  }
 }
