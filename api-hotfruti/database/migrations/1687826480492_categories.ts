@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments("id").primary();
       table.string("name").notNullable();
       table.string("description").nullable();
-      table.string("position").notNullable();
+      table.integer("position").notNullable().defaultTo(1);
       table.boolean("active").notNullable().defaultTo(true);
       table
         .integer("establishment_id")
@@ -17,7 +17,7 @@ export default class extends BaseSchema {
         .references("id")
         .inTable("establishments")
         .onDelete("RESTRICT");
-      table.timestamp("deleted").nullable();
+      table.timestamp("deleted_at").nullable();
       table.timestamp("created_at", { useTz: true });
       table.timestamp("updated_at", { useTz: true });
     });
