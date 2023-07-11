@@ -22,10 +22,13 @@ export default class EditClientValidator {
         whereNot: { id: this.refs.user_id },
       }),
     ]),
-    password: schema.string.nullableAndOptional({}, [rules.minLength(6), rules.maxLength(180)]),
-    phone: schema.string({trim: true}, [
+    password: schema.string.nullableAndOptional({}, [
+      rules.minLength(6),
+      rules.maxLength(180),
+    ]),
+    phone: schema.string({ trim: true }, [
       rules.mobile({
-        locale: ['pt-BR'],
+        locale: ["pt-BR"],
       }),
       rules.maxLength(15),
     ]),
@@ -35,8 +38,9 @@ export default class EditClientValidator {
     required: "The {{ field }} is mandatory for updating",
     "email.email": "The {{ field }} must be a valid email",
     "email.unique": "The email is already in use by another user",
-    "password.minLength" : "The {{ field }} must be at least 6 characters long",
-    "password.maxLength" : "The {{ field }} must have a maximum of 180 characters",
+    "password.minLength": "The {{ field }} must be at least 6 characters long",
+    "password.maxLength":
+      "The {{ field }} must have a maximum of 180 characters",
     "phone.mobile": "The {{ field }} must be a valid phone",
   };
 }

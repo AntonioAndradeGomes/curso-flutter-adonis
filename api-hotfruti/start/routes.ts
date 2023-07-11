@@ -5,12 +5,14 @@ Route.get("/", async () => {
 });
 
 //login
-Route.post("/login", "AuthController.login",);
+Route.post("/login", "AuthController.login");
 //logout
 Route.post("/logout", "AuthController.logout");
 
 Route.group(() => {
-  Route.get('/auth/me', "AuthController.me");
+  Route.get("/auth/me", "AuthController.me");
+
+  //edição do cliente
   Route.put("/client", "ClientsController.update");
 }).middleware("auth");
 
