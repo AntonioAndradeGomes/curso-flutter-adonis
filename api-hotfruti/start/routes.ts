@@ -12,3 +12,5 @@ Route.post("/logout", "AuthController.logout");
 Route.group(() => {
   Route.get('/auth/me', "AuthController.me");
 }).middleware("auth");
+
+Route.post("/client/register", "ClientsController.store");
