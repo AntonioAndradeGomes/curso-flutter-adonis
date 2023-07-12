@@ -37,4 +37,5 @@ export default class Product extends BaseModel {
 
   @column.dateTime()
   public deletedAt: DateTime | null;
+
 }
