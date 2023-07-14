@@ -2,11 +2,11 @@ import { BaseModel, column } from "@ioc:Adonis/Lucid/Orm";
 
 export default class CityEstablishment extends BaseModel {
   @column({ isPrimary: true })
-  public cityId: number;
+  public city_id: number;
 
   @column({ isPrimary: true })
-  public establishmentId: number;
+  public establishment_id: number;
 
   @column()
-  public deliveryCost: number;
+  public delivery_cost: number;
 }

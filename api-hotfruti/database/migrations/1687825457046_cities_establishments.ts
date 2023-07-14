@@ -21,8 +21,7 @@ export default class extends BaseSchema {
       table.decimal("delivery_cost", 8, 2).notNullable();
       //
       table.primary(["city_id", "establishment_id"]);
-      /*table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })*/
+
     });
   }
 

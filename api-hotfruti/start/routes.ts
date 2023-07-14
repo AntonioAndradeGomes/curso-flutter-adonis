@@ -17,3 +17,7 @@ Route.group(() => {
 }).middleware("auth");
 
 Route.post("/client/register", "ClientsController.store");
+
+//cidades
+Route.get("/cities", "CitiesController.index");
+Route.get("/cities/:id/establishments", "CitiesController.establishments");
